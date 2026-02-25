@@ -1,0 +1,52 @@
+.media-container {
+  position: fixed;
+  width: 20em;
+  aspect-ratio: 16 / 9;
+  border-radius: 2%;
+  pointer-events: none;
+  overflow: hidden;
+  visibility: hidden;
+  /* GSAP autoAlpha handles this */
+  z-index: 1000;
+
+  /* Defaults suitable for Desktop override */
+  top: 0;
+  right: 34em;
+}
+
+.media-container div,
+.media-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+  /* Performance boost for mobile */
+}
+
+.projects_link {
+  transition: opacity 0.25s ease;
+  opacity: 1;
+}
+
+/* --- MOBILE SPECIFIC STYLES --- */
+@media (max-width: 799px) {
+  /* Layout overrides (from previous step) */
+  .media-container {
+    right: 1em;
+    width: 10em;
+    top: 50%;
+    left: auto;
+  }
+
+  /* Opacity Logic - NOW INSIDE MOBILE QUERY */
+  .projects_c-l.has-active .projects_link {
+    opacity: 0.4;
+  }
+
+  .projects_c-l.has-active .projects_link.is-active {
+    opacity: 1;
+  }
+}
