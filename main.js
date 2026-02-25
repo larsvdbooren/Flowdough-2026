@@ -1,3 +1,13 @@
+CustomEase.create("flowEase", "M0,0 C0.65,0.05 0,1 1,1");
+
+// Lenis - ScrollTrigger
+const lenis = new Lenis();
+lenis.on("scroll", ScrollTrigger.update);
+gsap.ticker.add((time) => {
+  lenis.raf(time * 1000);
+});
+gsap.ticker.lagSmoothing(0);
+
 // Page Load
 // Optional: Always reset scroll to top on page load
 window.scrollTo(0, 0);
