@@ -1,37 +1,31 @@
 CustomEase.create("flowEase", "M0,0 C0.65,0.05 0,1 1,1");
 
-/*
-// Lenis - ScrollTrigger
+// 1. Initialize Lenis ONLY ONCE
 const lenis = new Lenis();
+window.lenis = lenis; // Optional: keeps it globally accessible if needed elsewhere
+
+// 2. Connect Lenis to GSAP ScrollTrigger
 lenis.on("scroll", ScrollTrigger.update);
 gsap.ticker.add((time) => {
   lenis.raf(time * 1000);
 });
 gsap.ticker.lagSmoothing(0);
-*/
 
-// Page Load
-// Optional: Always reset scroll to top on page load
+// 3. Page Load Setup
 window.scrollTo(0, 0);
 
-// Prevent scrolling during page load
-document.body.style.overflow = "hidden";
-if (window.lenis) {
-  window.lenis.destroy();
-}
+// Stop scrolling during page load
+lenis.stop();
+document.body.style.overflow = "hidden"; // Good fallback for non-Lenis interactions
 
-// Initialize lenis but don't start it yet
-const lenis = new Lenis();
-window.lenis = lenis;
-
-// Selectors
+// 4. Selectors
 const items = document.querySelectorAll(".page-load_img-item");
 const logoWrap = document.querySelector(".page-load_logo-w");
 const revealElements = document.querySelectorAll("[page-load-element]");
 
-// Prepare initial transforms/opacity
+// 5. Prepare initial transforms/opacity
 gsap.set(".page-load-w", { opacity: 1 });
-gsap.set(items, { scale: 0, opacity: 1 }); // Show loader, hide items
+gsap.set(items, { scale: 0, opacity: 1 });
 gsap.set(revealElements, { opacity: 0, y: "-1em" });
 gsap.set(".page-load_btn-w", { opacity: 0 });
 gsap.set(logoWrap, { opacity: 0, gap: "30em" });
